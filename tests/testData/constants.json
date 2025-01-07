@@ -1,5 +1,4 @@
 {
     "loginFailed":"Username and password do not match",
-    "orderSuccessText": "Thank you for your order!",
-     "url":"https://www.saucedemo.com/"
+    "orderSuccessText": "Thank you for your order!"
 }

@@ -1,7 +1,4 @@
 {
-    "validUserName":"standard_user",
-    "validPassword":"secret_sauce",
-    "invalidUserName":"Test_User",
     "itemsToAdd": ["Sauce Labs Backpack", "Sauce Labs Bolt T-Shirt","Sauce Labs Fleece Jacket"],
     "userDetails": ["John", "Doe","11101"]
 }

@@ -5,7 +5,7 @@ import { CartPage } from './pages/cartPage.ts';
 import { CheckoutInformationPage } from './pages/checkoutInformationPage.ts'; 
 import { OverviewPage } from './pages/overviewPage.ts';
 import { OrderCompletePage } from './pages/orderCompletePage.ts';
-import * as testData from './testData/sauceDemoLoginTestData.json';
+import * as testData from './testData/sauceDemoTestData.json';
 import * as constants from './testData/constants.json';
 
 let loginPage: LoginPage;
@@ -22,8 +22,8 @@ test.beforeEach('Sauce demo login and add item', async ({ page }) => {
     checkoutInformationPage =new CheckoutInformationPage(page);
     overviewPage = new OverviewPage(page);
     orderCompletePage= new OrderCompletePage(page)
-    await loginPage.navigateTo(constants.url);
-    await loginPage.completeLogin(testData.validUserName, testData.validPassword);
+    await loginPage.navigateTo(process.env.url);
+    await loginPage.completeLogin(process.env.validUserName, process.env.validPassword);
     await productPage.addItems(testData.itemsToAdd)
     await productPage.clickCartButton();
 })

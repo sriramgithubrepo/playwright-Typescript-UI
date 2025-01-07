@@ -1,21 +1,20 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from './pages/loginPage';
-import * as testData from './testData/sauceDemoLoginTestData.json';
 import * as constants from './testData/constants.json';
 
 let loginPage: LoginPage;
 
 test.beforeEach('Sauce demo launch page', async ({ page }) => {
     loginPage = new LoginPage(page);
-    await loginPage.navigateTo(constants.url);
+    await loginPage.navigateTo(process.env.url);
 })
 
 test('Sauce demo login success', async ({ page }) => {
-    await loginPage.completeLogin(testData.validUserName, testData.validPassword);
+    await loginPage.completeLogin(process.env.validUserName, process.env.validPassword);
     expect(page.url()).toContain('/inventory');
 })
 
 test('Sauce demo login failure', async ({ page }) => {
     await page.waitForTimeout(500);
-    expect(await loginPage.getFailedLoginText(testData.invalidUserName, testData.validPassword)).toContain(constants.loginFailed);
+    expect(await loginPage.getFailedLoginText(process.env.invalidUserName, process.env.validPassword)).toContain(constants.loginFailed);
 })

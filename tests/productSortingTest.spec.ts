@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from './pages/loginPage.ts'
 import { ProductPage } from './pages/productPage.ts';
-import * as testData from './testData/sauceDemoLoginTestData.json';
-import * as constants from './testData/constants.json';
 import { sortAndCompareStringArray, sortAndCompareNumberArray } from './helper/utils.ts';
 
 let loginPage: LoginPage;
@@ -11,8 +9,8 @@ let productPage: ProductPage;
 test.beforeEach('Sauce demo login', async ({ page }) => {
     loginPage = new LoginPage(page);
     productPage = new ProductPage(page);
-    await loginPage.navigateTo(constants.url);
-    await loginPage.completeLogin(testData.validUserName, testData.validPassword);
+    await loginPage.navigateTo(process.env.url);
+    await loginPage.completeLogin(process.env.validUserName, process.env.validPassword);
 })
 test('Verify product page default sorting order', async ({ page }) => {
     const allItemDesc = await productPage.getAllItemDescription();
