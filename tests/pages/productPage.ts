@@ -1,16 +1,16 @@
 import { Locator, Page } from '@playwright/test';
 import BasePage from './basePage';
 
+//Product page class handles the locators and associated functions related to Product Page
+
 export class ProductPage extends BasePage {
-  readonly page: Page;
-  readonly sortButton: string;
-  readonly cartButton: Locator;
-  readonly allItemDescription: Locator;
-  readonly allItemPrice: Locator;
+  private readonly sortButton: string;
+  private readonly cartButton: Locator;
+  private readonly allItemDescription: Locator;
+  private readonly allItemPrice: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.page = page;
     this.sortButton = 'select[data-test="product-sort-container"]';
     this.cartButton = page.locator('#shopping_cart_container');
     this.allItemDescription = page.locator('div[data-test="inventory-item-name"]');
@@ -27,9 +27,21 @@ export class ProductPage extends BasePage {
     await this.selectStaticDropdown(this.sortButton, textOrValue, optionToSelect);
   }
 
+  getAddtoCartLocators(productName:string):Locator{
+    return this.page.locator(`//div[contains(@class, "inventory_item") and .//div[normalize-space(.)="${productName}"]]//button[text()="Add to cart"]`)
+   }
+
   //Retrieves the descriptions of all items displayed
   async getAllItemDescription(): Promise<string[]> {
     return await this.getAllElementText(this.allItemDescription);
+  }
+
+  //Adds multiple items to the cart
+  async addItems(itemsToAdd:string[]) {
+    for(const item of itemsToAdd){
+     const addtoCartButton= this.getAddtoCartLocators(item);
+     await addtoCartButton.click();
+    }
   }
 
   //Retrieves the price of all items displayed and converts to a Number array

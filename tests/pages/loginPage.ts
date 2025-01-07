@@ -4,7 +4,6 @@ import BasePage from './basePage';
 // Login page class handles the locators and associated functions related to Login Page
 
 export class LoginPage extends BasePage {
-    readonly page: Page;
     private readonly userNameTextBox: Locator;
     private readonly passwordTextBox: Locator;
     private readonly loginButton: Locator;
@@ -12,7 +11,6 @@ export class LoginPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        this.page = page;
         this.userNameTextBox = page.locator('#user-name');
         this.passwordTextBox = page.locator('#password');
         this.loginButton = page.locator('#login-button');

@@ -1,5 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
+//This BasePage class that contains all the common reusable methods
+
 export default class BasePage {
     readonly page: Page;
     constructor(page: Page) {
