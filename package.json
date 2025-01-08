@@ -2,7 +2,15 @@
   "name": "playwright-typescript-ui",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean.report": "rimraf allure-report allure-results && mkdirp allure-report allure-results",
+    "generate.report": "npx allure generate --single-file ./allure-results --clean",
+    "open.report": "npx allure open ./allure-report",
+    "pretest": "npm run clean.report",
+    "posttest": "npm run generate.report && npm run open.report",
+    "execute.script": "npx playwright test --project=chromium",
+    "test": "npm run execute.script || npm run posttest"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -10,6 +18,10 @@
   "devDependencies": {
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.5",
-    "dotenv": "^16.4.7"
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.8",
+    "dotenv": "^16.4.7",
+    "mkdirp": "^3.0.1",
+    "rimraf": "^6.0.1"
   }
 }
