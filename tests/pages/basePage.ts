@@ -29,6 +29,11 @@ export default class BasePage {
         return await element.innerText();
     }
 
+     //  Retrieves the inner text of the specified element
+     async getElementVisibility(element: Locator): Promise<boolean> {
+        return await element.isVisible();
+    }
+
     // Retrieves the inner text of all the matching elements
     async getAllElementText(element: Locator): Promise<string[]> {
         return await element.allInnerTexts();
