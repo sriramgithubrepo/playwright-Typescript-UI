@@ -1,0 +1,44 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Install Playwright and necessary browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # Step 5: Run Playwright tests
+      - name: Run Playwright tests
+        run: npm run test
+
+      # Step 6: Upload test results as artifact (even on failure)
+      - name: Upload Playwright test report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
