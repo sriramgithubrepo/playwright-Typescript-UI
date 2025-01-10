@@ -9,7 +9,8 @@
     "pretest": "npm run clean.report",
     "posttest": "npm run generate.report && npm run open.report",
     "execute.script": "npx playwright test --project=chromium",
-    "test": "npm run execute.script || npm run posttest"
+    "test": "npm run execute.script || npm run posttest",
+    "ci.test": "npm run execute.script"
   },
   "keywords": [],
   "author": "",

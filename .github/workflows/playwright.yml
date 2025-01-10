@@ -32,9 +32,13 @@ jobs:
 
       # Step 5: Run Playwright tests
       - name: Run Playwright tests
-        run: npm run test
+        command: npm run ci.test
 
-      # Step 6: Upload test results as artifact (even on failure)
+      # Step 6: Generate the Allure report
+      - name: Generate Allure report
+        run: allure generate ./allure-results --clean
+
+      # Step 7: Upload test results as artifact (even on failure)
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v3
         if: always()
