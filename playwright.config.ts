@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 require('dotenv').config();
 export default defineConfig({
+  globalSetup: require.resolve('./global-setup'),
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -70,6 +71,7 @@ export default defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
+ 
 
   /* Run your local dev server before starting the tests */
   // webServer: {
