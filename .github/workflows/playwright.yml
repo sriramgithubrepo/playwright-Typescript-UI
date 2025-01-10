@@ -36,13 +36,13 @@ jobs:
 
       # Step 6: Generate the Allure report
       - name: Generate Allure report
-        run: npx allure generate --single-file ./allure-results --clean
+        run: npx allure generate --single-file ./allure-results --clean -o ./allure-report
 
       # Step 7: Upload test results as artifact (even on failure)
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: allure-report
+          path: ./allure-report/
           retention-days: 30
