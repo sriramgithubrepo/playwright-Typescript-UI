@@ -32,7 +32,7 @@ jobs:
 
       # Step 5: Run Playwright tests
       - name: Run Playwright tests
-        command: npm run ci.test
+        run: npm run ci.test
 
       # Step 6: Generate the Allure report
       - name: Generate Allure report
