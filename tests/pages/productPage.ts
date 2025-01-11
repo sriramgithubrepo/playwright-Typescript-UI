@@ -4,7 +4,7 @@ import BasePage from './basePage';
 //Product page class handles the locators and associated functions related to Product Page
 
 export class ProductPage extends BasePage {
-  private readonly sortButton: string;
+  private readonly sortButton: Locator;
   private readonly cartButton: Locator;
   private readonly allItemDescription: Locator;
   private readonly allItemPrice: Locator;
@@ -12,7 +12,7 @@ export class ProductPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.sortButton = 'select[data-test="product-sort-container"]';
+    this.sortButton = page.locator('select[data-test="product-sort-container"]');
     this.cartButton = page.locator('#shopping_cart_container');
     this.allItemDescription = page.locator('div[data-test="inventory-item-name"]');
     this.allItemPrice = page.locator('div[data-test="inventory-item-price"]');

@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/pomFixtures.ts';
 import createBooking from './testData/booking.json';
-import updateBooking from './testData/update-booking.json';
+import updateBooking from './testData/updatebooking.json';
 
 //Common code to validate response generation and statuscode
 const validateResponse = (response, expectedStatus: number) => {
@@ -8,7 +8,7 @@ const validateResponse = (response, expectedStatus: number) => {
   expect(response.status()).toBe(expectedStatus);
 };
 
-  test.beforeEach('CRUD operation of an API',async ({request})=>{
+  test.beforeEach('Create booking ',async ({request})=>{
         const response = await request.post(`${process.env.apiurl}/booking`, {
             data: createBooking, 
             headers: {
