@@ -8,7 +8,9 @@
     "open.report": "npx allure open ./allure-report",
     "pretest": "npm run clean.report",
     "posttest": "npm run generate.report && npm run open.report",
-    "execute.script": "npx playwright test --project=chromium",
+    "execute.script.chromium": "npx playwright test --project=chromium",
+    "test.chromium": "npm run execute.script.chromium || npm run posttest",
+    "execute.script": "npx playwright test",
     "test": "npm run execute.script || npm run posttest",
     "ci.test": "npm run execute.script"
   },
