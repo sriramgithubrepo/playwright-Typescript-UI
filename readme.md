@@ -24,7 +24,7 @@ Below have mentioned the prerequisites and installation steps
 ## Project folder structure
 
 ### .github\workflows
-- playwrught.yml -> Has the configuration for intergrating and executing test as part of github action, and the execution report is stored under each job as a zip file, under Artifacts section [here](https://github.com/sriramgithubrepo/playwright-Typescript-UI/actions/runs/12724860455)
+- playwright.yml -> Has the configuration for intergrating and executing test as part of github action, and the execution report is stored under each job as a zip file, under Artifacts section [here](https://github.com/sriramgithubrepo/playwright-Typescript-UI/actions/runs/12724860455)
 
 ### allure-report
 - index.html -> Allure HTML report, which automatically opens in the default browser post test completion
