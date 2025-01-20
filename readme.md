@@ -2,7 +2,7 @@
 This repo primarily focuses on playwright typescript UI automation for [Sauce demo](https://www.saucedemo.com/) application, and also test basic API CRUD operation. Used github action for CI/CD integration.
 Below have mentioned the prerequisites and installation steps
 
-## Pre-requisites
+## Pre-requisites:
 - node
 - Typescript
 - Java(ensure its added in Environmental variable)
