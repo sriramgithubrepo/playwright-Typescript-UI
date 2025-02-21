@@ -41,9 +41,7 @@ export class LoginPage extends BasePage {
 
     // Login with invalid credentials
        async getFailedLoginText(username: string, password: string): Promise<String> {
-        await this.enterUserName(username);
-        await this.enterPassword(password);
-        await this.clickLogin();
+        this.completeLogin(username,password)
         return await this.getElementText(this.failedLogin);
     }
 

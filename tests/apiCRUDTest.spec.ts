@@ -1,9 +1,10 @@
+import { APIResponse } from '@playwright/test';
 import { test, expect } from '../fixtures/pomFixtures.ts';
 import createBooking from './testData/booking.json';
 import updateBooking from './testData/updatebooking.json';
 
 //Common code to validate response generation and statuscode
-const validateResponse = (response, expectedStatus: number) => {
+const validateResponse = (response: APIResponse, expectedStatus: number) => {
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(expectedStatus);
 };
