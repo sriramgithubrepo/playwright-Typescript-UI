@@ -14,11 +14,11 @@ jobs:
     steps:
       # Step 1: Checkout code from repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -40,7 +40,7 @@ jobs:
 
       # Step 7: Upload test results as artifact (even on failure)
       - name: Upload Playwright test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: allure-report
