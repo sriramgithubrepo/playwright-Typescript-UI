@@ -2,8 +2,8 @@ import { test, expect } from '../fixtures/pomFixtures.ts';
 import { sortAndCompareStringArray, sortAndCompareNumberArray } from './helper/utils.ts';
 
 test.beforeEach('Sauce demo login', async ({ loginPage }) => {
-    await loginPage.navigateTo(process.env.url);
-    await loginPage.completeLogin(process.env.validUserName, process.env.validPassword);
+    await loginPage.navigateTo(process.env.url as string);
+    await loginPage.completeLogin(process.env.validUserName as string, process.env.validPassword as string);
 });
 
 test('Verify product page default sorting order', async ({ productPage,page }) => {

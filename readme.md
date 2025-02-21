@@ -15,7 +15,7 @@ Below have mentioned the prerequisites and installation steps
 
 ## To run test and view report
 - Run the command `npm run test`
-- This command will run all the test against 3 browsers(chromium,webkit,firefox)
+- This command will run the tests against 3 browsers(chromium,webkit,firefox)
 - Run the command `npm run test.chromium`
 - This command will run all the test against chromium browser
 - Once the execution completes, the report will be automatically opening in the default browser as below
