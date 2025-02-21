@@ -1,8 +1,8 @@
 # Playwright typescript framework
-This repo is primarily focuses on playwright typescript UI automation for [Sauce demo](https://www.saucedemo.com/) application, and also test basic API CRUD operation. Used github action for CI/CD integration.
+This repo primarily focuses on playwright typescript UI automation for [Sauce demo](https://www.saucedemo.com/) application, and also test basic API CRUD operation. Used github action for CI/CD integration.
 Below have mentioned the prerequisites and installation steps
 
-## Pre-requisites
+## Pre-requisites:
 - node
 - Typescript
 - Java(ensure its added in Environmental variable)
@@ -18,13 +18,13 @@ Below have mentioned the prerequisites and installation steps
 - This command will run the tests against 3 browsers(chromium,webkit,firefox)
 - Run the command `npm run test.chromium`
 - This command will run all the test against chromium browser
-- Once the execution completes, the report will be automatically opening in the default browser as below
+- Once the execution completes using `npm run test`, the report will be automatically opening in the default browser as below
 ![](readme-image/executionreport.png)
 
 ## Project folder structure
 
 ### .github\workflows
-- playwrught.yml -> Has the configuration for intergrating and executing test as part of github action, and the execution report is stored under each job as a zip file, under Artifacts section [here](https://github.com/sriramgithubrepo/playwright-Typescript-UI/actions/runs/12724860455)
+- playwright.yml -> Has the configuration for intergrating and executing test as part of github action, and the execution report is stored under each job as a zip file, under Artifacts section [here](https://github.com/sriramgithubrepo/playwright-Typescript-UI/actions/runs/12724860455)
 
 ### allure-report
 - index.html -> Allure HTML report, which automatically opens in the default browser post test completion
