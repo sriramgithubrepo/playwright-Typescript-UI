@@ -2,81 +2,71 @@ import { APIResponse } from '@playwright/test';
 import { test, expect } from '../fixtures/pomFixtures.ts';
 import createBooking from './testData/booking.json';
 import updateBooking from './testData/updatebooking.json';
+import fs from "fs/promises";
 
-//Common code to validate response generation and statuscode
+// Common function to validate response
 const validateResponse = (response: APIResponse, expectedStatus: number) => {
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(expectedStatus);
 };
 
-  test.beforeEach('Create booking ',async ({request})=>{
-        const response = await request.post(`${process.env.apiurl}/booking`, {
-            data: createBooking, 
-            headers: {
-              'Content-Type': 'application/json', 
-            },
-          });
-        const responseBody=await response.json();
-        validateResponse(response,200);
-        expect(responseBody).toHaveProperty('bookingid');
-        expect(typeof responseBody.bookingid).toBe('number');
-        const bookingId = responseBody.bookingid;
+// Common function to get the token
+const getAuthToken = async () => {
+  const tokenData = await fs.readFile("apitoken.json", "utf-8");
+  return JSON.parse(tokenData).token;
+};
 
-        // Save the bookingId to a file
-        process.env.NEWBOOKING_ID =bookingId
-    })
-  
-test('GET all booking', async ({ request }) => {
-    const response = await request.get(`${process.env.apiurl}/booking`);
-    validateResponse(response,200);
-})
+let bookingID: number;
+let token: string;
 
-test('GET booking by id', async ({ request }) => {
-  const bookingID=process.env.NEWBOOKING_ID;
-  expect(bookingID).toBeDefined();
-    const response = await request.get(`${process.env.apiurl}/booking/`+bookingID);
-    validateResponse(response,200);
-})
+// Setup before each test
+test.beforeEach(async ({ request }) => {
+  const response = await request.post(`${process.env.apiurl}/booking`, {
+    data: createBooking,
+    headers: { 'Content-Type': 'application/json' },
+  });
+  validateResponse(response, 200);
+
+  const responseBody = await response.json();
+  expect(responseBody).toHaveProperty('bookingid');
+  bookingID = responseBody.bookingid;
+});
+
+// Fetch token once before all tests
+test.beforeAll(async () => {
+  token = await getAuthToken();
+});
+
+test('GET all bookings', async ({ request }) => {
+  const response = await request.get(`${process.env.apiurl}/booking`);
+  validateResponse(response, 200);
+});
+
+test('GET booking by ID', async ({ request }) => {
+  const response = await request.get(`${process.env.apiurl}/booking/${bookingID}`);
+  validateResponse(response, 200);
+});
 
 test('Update booking using PUT', async ({ request }) => {
-  const bookingID=process.env.NEWBOOKING_ID;
-  expect(bookingID).toBeDefined();
-    const response = await request.put(`${process.env.apiurl}/booking/`+bookingID,{
-      data: updateBooking, 
-      headers: {
-        Cookie: `token=${process.env.TOKEN}`,
-        Accept: "*/*",
-      },
-    });
-    validateResponse(response,200);
-})
+  const response = await request.put(`${process.env.apiurl}/booking/${bookingID}`, {
+    data: updateBooking,
+    headers: { Cookie: `token=${token}`, Accept: "*/*" },
+  });
+  validateResponse(response, 200);
+});
 
-test('Partial Update booking using PATCH', async ({ request }) => {
-  const bookingID=process.env.NEWBOOKING_ID;
-  expect(bookingID).toBeDefined();
-  const payload = {
-    firstname:'James',
-    lastname:'Brown'
-  }
-    const response = await request.patch(`${process.env.apiurl}/booking/`+bookingID,{
-      data: payload, 
-      headers: {
-        Cookie: `token=${process.env.TOKEN}`,
-        Accept: "*/*",
-      },
-    });
-    validateResponse(response,200);
-})
+test('Partial update using PATCH', async ({ request }) => {
+  const response = await request.patch(`${process.env.apiurl}/booking/${bookingID}`, {
+    data: { firstname: 'James', lastname: 'Brown' },
+    headers: { Cookie: `token=${token}`, Accept: "*/*" },
+  });
+  validateResponse(response, 200);
+});
 
-test('Delete booking by id', async ({ request }) => {
-  const bookingID=process.env.NEWBOOKING_ID;
-  expect(bookingID).toBeDefined();
-    const response = await request.delete(`${process.env.apiurl}/booking/`+bookingID,{
-      headers: {
-       'Content-Type': 'application/json',
-        Cookie: `token=${process.env.TOKEN}`,      
-      },
-    });
+test('Delete booking by ID', async ({ request }) => {
+  const response = await request.delete(`${process.env.apiurl}/booking/${bookingID}`, {
+    headers: { 'Content-Type': 'application/json', Cookie: `token=${token}` },
+  });
   expect(response.status()).toBe(201);
   expect(response.statusText()).toBe("Created");
 });

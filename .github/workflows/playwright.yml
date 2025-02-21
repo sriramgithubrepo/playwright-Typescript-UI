@@ -11,6 +11,15 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
 
+    env:
+      url: ${{ secrets.URL }}
+      apiurl: ${{ secrets.APIURL }}
+      validUserName: ${{ secrets.VALIDUSERNAME }}
+      validPassword: ${{ secrets.VALIDPASSWORD }}
+      invalidUserName: ${{ secrets.INVALIDUSERNAME }}
+      USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+      USER_ADMIN_PASSWORD: ${{ secrets.USER_ADMIN_PASSWORD }}
+
     steps:
       # Step 1: Checkout code from repository
       - name: Checkout code

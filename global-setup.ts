@@ -1,4 +1,5 @@
 import { PlaywrightTestConfig, request } from "@playwright/test";
+import fs from "fs/promises";
 
 async function globalSetup(_config: PlaywrightTestConfig) {
   const url = "https://restful-booker.herokuapp.com/auth";
@@ -12,8 +13,7 @@ async function globalSetup(_config: PlaywrightTestConfig) {
   });
 
   const body = await response.json();
-  process.env.TOKEN = body.token;
+  await fs.writeFile("apitoken.json", JSON.stringify({ token: body.token }));
 
 }
-
 export default globalSetup;
