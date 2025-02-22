@@ -17,5 +17,4 @@ test('Verify user able to place an order', async ({ cartPage,checkoutInformation
     await overviewPage.clickFinishButton();
     await page.waitForTimeout(1000);
     expect(await orderCompletePage.getOrderSuccessText()).toBe(constants.orderSuccessText);
-    console.log('Place order Test 1');
 });

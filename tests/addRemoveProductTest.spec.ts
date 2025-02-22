@@ -9,5 +9,4 @@ test('Verify user can add and then remove product ', async ({ loginPage,productP
     await productPage.clickCartButton();
     await productPage.removeItems(testData.itemsToAdd);
    expect(await productPage.getCartCountVisibility()).toBeFalsy();
-   console.log('Add and remove Test');
 });

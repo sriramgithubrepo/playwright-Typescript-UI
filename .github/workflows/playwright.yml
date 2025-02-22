@@ -14,11 +14,11 @@ jobs:
     env:
       url: ${{ vars.URL }}
       apiurl: ${{ vars.APIURL }}
-      validUserName: ${{ vars.VALIDUSERNAME }}
-      validPassword: ${{ vars.VALIDPASSWORD }}
-      invalidUserName: ${{ vars.INVALIDUSERNAME }}
-      USERNAME_ADMIN: ${{ vars.USERNAME_ADMIN }}
-      USER_ADMIN_PASSWORD: ${{ vars.USER_ADMIN_PASSWORD }}
+      validUserName: ${{ secrets.VALIDUSERNAME }}
+      validPassword: ${{ secrets.VALIDPASSWORD }}
+      invalidUserName: ${{ secrets.INVALIDUSERNAME }}
+      USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+      USER_ADMIN_PASSWORD: ${{ secrets.USER_ADMIN_PASSWORD }}
 
     steps:
       # Step 1: Checkout code from repository
