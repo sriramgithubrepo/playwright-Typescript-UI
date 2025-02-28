@@ -69,7 +69,7 @@ Below have mentioned the prerequisites and installation steps
 - productSortingTest.spec.ts -> Test that validates all 4 sorting functionalities(Description ascending/descending and Price ascending/descending) available in products page
 
 ### Root folder
-- .env -> Holds sensitive information and URLs. Having them in .env file helps in parameterising the values from CLI and configuring environment variables in CI runners
+- .env -> Holds sensitive information and URLs. Have configuried environment variables in CI runners 
 
 - global-seup.ts -> Has the step for token generation for API test, which is then being shared in other API test
 
